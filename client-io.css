@@ -1,7 +1,28 @@
 body {
   background: #22252A;
   font-family: "monospace", Helvetica, Arial, sans-serif;
+  padding: 0; margin: 0;
 }
+
+a img {
+  border: none !important; }
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  -webkit-transition-property: opacity, -webkit-transform, color, background-color, padding, -webkit-box-shadow;
+  -webkit-transition-duration: 0.15s;
+  -webkit-transition-timing-function: ease-out; }
+  a:hover { opacity: 0.8; }
+#ribbon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2; }
+
+
+
 #room {
   position: absolute;
   top: 150px;

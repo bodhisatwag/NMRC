@@ -8,7 +8,7 @@ var http = require("http"),
   nicks = {},
   rooms = {},
   ignore_uniq = false,
-  allowed_domains = ["chat.solisoft.net:8090"];
+  allowed_domains = ["chat.solisoft.net:8090", "localhost:8090"];
  
 var send404 = function(res) {
   res.writeHead(404);
@@ -68,7 +68,7 @@ var httpServer = http.createServer(function(req, res) {
     if(path == "/") path = "/client-io.html";
     switch (path) {
       default:
-        if (/\.(js|html|swf|wav|css)$/.test(path)){
+        if (/\.(js|html|swf|wav|css|png)$/.test(path)){
           try {
           
             var ct = "text/html";
@@ -83,7 +83,11 @@ var httpServer = http.createServer(function(req, res) {
             if(path.substr(-4) === '.wav') {
               ct = "audio/x-wav";
               mode = "binary";
-            }            
+            }
+            if(path.substr(-4) === '.png') {
+              ct = "image/png";
+              mode = "binary";
+            }
             res.writeHead(200, {'Content-Type': ct });
             res.write(fs.readFileSync(__dirname + path, mode), mode);
             res.end();
@@ -179,7 +183,3 @@ socket.on("connection", function(client){
   
   client.send(json({ msg: "/hello " + client.sessionId }));
 });
-  
-
-  
-

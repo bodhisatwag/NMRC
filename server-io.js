@@ -125,7 +125,8 @@ socket.on("connection", function(client){
   client.on("message", function(message) {
     var allowed = false;
     for(domain in allowed_domains) {
-      if(domain == client.request.headers.host) allowed = true;
+      
+      if(allowed_domains[domain] == client.request.headers.host) allowed = true;
     }
     sys.puts(message);
     if(allowed) {

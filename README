@@ -1,0 +1,18 @@
+Node Multi Rooms Chat
+---------------------
+
+!! You need the latest node.js !!
+
+How to run the demo :
+------------------------------------------
+git submodule init
+git submodule update
+git submodule foreach git submodule init
+git submodule foreach git submodule update
+sudo node server-io.js
+------------------------------------------
+
+Then open your browser : http://localhost:8090
+
+Enjoy !
+

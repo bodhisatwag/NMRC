@@ -8,12 +8,7 @@ var http = require("http"),
   nicks = {},
   rooms = {},
   ignore_uniq = false,
-  allowed_domains = ["chat.solisoft.net:8090"]; // Not used for now
-
-for(var i = 0; i < allowed_domains.length; i++) {
-  allowed_domains[i] = allowed_domains[i].replace(new RegExp("\\.", "g"), "\\.").replace(new RegExp("\\/", "g"), "\\/");
-  allowed_domains[i] = new RegExp(allowed_domains[i], "g");  
-}
+  allowed_domains = ["chat.solisoft.net:8090"];
  
 var send404 = function(res) {
   res.writeHead(404);

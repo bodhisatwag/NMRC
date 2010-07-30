@@ -8,7 +8,7 @@ var http = require("http"),
   nicks = {},
   rooms = {},
   ignore_uniq = false,
-  allowed_domains = ["http://chat.solisoft.net"]; // Not used fr now
+  allowed_domains = ["http://chat.solisoft.net"]; // Not used for now
 
 for(var i = 0; i < allowed_domains.length; i++) {
   allowed_domains[i] = allowed_domains[i].replace(new RegExp("\\.", "g"), "\\.").replace(new RegExp("\\/", "g"), "\\/");
@@ -136,7 +136,8 @@ socket.on("connection", function(client){
         if(ignore_uniq || uniqNick(client, msg.slice(1).join(" ").trim())) {
           if(nicks[client.sessionId.toString()] == undefined) nicks[client.sessionId.toString()] = {};
           nicks[client.sessionId.toString()]["nick"] = msg.slice(1).join(" ").trim();
-          client.send(json({ msg: "/your_nick " + msg.slice(1).join(" ").trim() }));          
+          client.send(json({ msg: "/your_nick " + msg.slice(1).join(" ").trim() }));   
+          sendNicksList(client, msg.slice(1).join(" "));       
         } else client.send(json({ msg: "/notice Login " + msg.slice(1).join(" ").trim() + " already used"}));
         break;
       case "/join":

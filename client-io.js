@@ -9,7 +9,6 @@ var socket = new io.Socket(null, {rememberTransport: false, port: 8090});
 socket.connect();
 
 socket.on('message', function(message){
-  console.info(message);
   message = JSON.parse(message);
   var data = message.msg.split(" ");
   
@@ -112,14 +111,17 @@ socket.on('message', function(message){
       _.each(data.slice(1).join(" ").split(","), function(data) {
         n = data.split(":");
         var nh = "#n_" + room + "_" + n[0];
+        var value = n[1];
+        
         if($(nh).html() == null) {
-          var value = n[1];
           if(n[1] == "undefined" || n[1] == undefined) value = n[0];
           if(n[0] == conn_id) $("#n_" + message.room).append("<div id='n_" + room + "_" +n[0]+"'>" + value +"</div>");
           else $("#n_" + message.room).append("<div id='n_" + room + "_" +n[0]+"'><a href='#' onclick='socket.send(\"/pm "+ n[0]+"\")'>" + value +"</a></div>");
         } else {
-          $(nh).html(value);          
+          $(nh + " a").html(value);
+          $("#r_" + n[0]).html("@" + value);
         }
+        
       });
       break;
       
